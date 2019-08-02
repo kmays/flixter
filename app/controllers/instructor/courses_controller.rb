@@ -4,10 +4,12 @@ class Instructor::CoursesController < ApplicationController
 
   def new
     @course = Course.new
+    @course = Image.new
   end
 
   def create
     @course = current_user.courses.create(course_params)
+    @course.images.create(image_params)
     if @course.valid?
       redirect_to instructor_course_path(@course)
     else
@@ -16,6 +18,7 @@ class Instructor::CoursesController < ApplicationController
   end
   
   def show
+    @course= Image.new
   end
   
   private
